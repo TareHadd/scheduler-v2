@@ -1,0 +1,55 @@
+<nav class="bg-light"
+[ngClass]="{
+    'open bg-dark': openNav
+}">
+
+    <div *ngIf="!openNav" class="pointer menu icon" (click)="openClose()">
+        <h1 class="d-flex justify-content-center"><i class="bi bi-list"></i></h1>
+    </div>
+
+    <div 
+    *ngIf="!openNav" 
+    class="pointer menu mt-4 text-dark icon" 
+    ngbPopover="{{ today | date:'Y d EE' }}" 
+    triggers="mouseenter:mouseleave" 
+    >
+        <h1 class="d-flex justify-content-center"><i class="bi bi-calendar-fill"></i></h1>
+    </div>
+
+    <div 
+    *ngIf="!openNav" 
+    class="pointer menu mt-4 text-dark icon"
+    ngbPopover="Open to see next appointment" 
+    triggers="mouseenter:mouseleave" >
+        <h1 class="d-flex justify-content-center"><i class="bi bi-card-checklist"></i></h1>
+    </div>
+
+
+    <div
+    class="content"
+    [ngClass]="{
+        'd-block': openNav
+    }">
+        <div class="bg-light text-dark heading d-flex justify-content-between px-2">
+            <p *ngIf="openNav">SCHEDULER</p>
+            <div class="pointer icon" (click)="openClose()" *ngIf="openNav" >
+                <i class="bi bi-list"></i>
+            </div>
+        </div>
+    
+        <div class="d-flex justify-content-center mt-4">
+            <app-datepicker-v2
+            (sendDay)="getDay($event)"
+            ></app-datepicker-v2>
+        </div>
+    
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <h4 class="mt-3 text-light w-100 next-viewing">NEXT VIEWING</h4>
+                <app-next-viewing
+                *ngIf="nodeData.length > 0"
+                [appointments]="nodeData"
+                ></app-next-viewing>
+        </div>
+    </div>
+    
+</nav>

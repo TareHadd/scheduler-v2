@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Node } from '../models/thedata'
-import { addDays, eachDayOfInterval, endOfWeek, format, startOfWeek, subDays } from 'date-fns';
-import { AppointmentsService } from '../services/appointments.service';
+import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
+import { Node } from '../core/models/thedata'
+import { addDays, eachDayOfInterval, endOfWeek, format, isThursday, startOfWeek, subDays } from 'date-fns';
+import { AppointmentsService } from '../core/services/appointments.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'
 import {formatDate} from '@angular/common'
 
@@ -11,6 +11,12 @@ import {formatDate} from '@angular/common'
   styleUrls: ['./scheduler-v2.component.scss'],
 })
 export class SchedulerV2Component implements OnInit {
+
+  openNav;
+
+  public screenWidth: any;
+  public screenHeight: any;
+
   date = new Date();
   startOfWeek!: any;
   endOfWeek!: any;
@@ -40,6 +46,9 @@ export class SchedulerV2Component implements OnInit {
   ngOnInit(): void {
     this.logic();
     this.getOnlyHours();
+    this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
+    console.log(this.screenWidth)
   }
 
   nextWeek() {
@@ -146,6 +155,7 @@ export class SchedulerV2Component implements OnInit {
 
   // Used to show week on big calendar if date is picked on small ones
   getDay(date) {
+    console.log(date)
     let year = date.year;
     let month = date.month;
     let day = date.day;
@@ -271,5 +281,11 @@ export class SchedulerV2Component implements OnInit {
       this.nodeData.push(fa);
     }
   }
+
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event) {
+  //   this.screenWidth = window.innerWidth;
+  //   this.screenHeight = window.innerHeight;
+  // }
 
 }

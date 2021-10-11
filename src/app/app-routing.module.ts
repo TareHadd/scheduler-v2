@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SchedulerV2Component } from './scheduler-v2/scheduler-v2.component';
 
 const routes: Routes = [
 
+  { path: '', component: SchedulerV2Component}
 
 ];
 

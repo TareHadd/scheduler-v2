@@ -13,9 +13,12 @@
     height:  3rem !important;
 }
 
-.ngb-dp-week{
+
+.ngb-dp-week, .ngb-dp-header, ngb-datepicker{
     background: white;
+    border-radius: 0 !important;
 }
+
 
 
 .modal-dialog{

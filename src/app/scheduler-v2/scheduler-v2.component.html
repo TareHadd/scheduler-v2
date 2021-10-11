@@ -1,9 +1,14 @@
 
-<main class="d-flex justify-content-center align-items-center bg-custom">
+<main class="d-flex justify-content-center align-items-center bg-dark position-relative">
 
     <div class="m-0 row w-100 d-flex justify-content-between pr-4">
 
-        <div class="col-2 p-0 ml-4">
+        <app-side-nav
+        [nodeData]="nodeData"
+        (date)="getDay($event)"
+        ></app-side-nav>
+
+        <!-- <div class="col-2 p-0 ml-4">
             <app-datepicker-v2
             (sendDay)="getDay($event)"
             ></app-datepicker-v2>
@@ -13,9 +18,9 @@
             *ngIf="nodeData.length > 0"
             [appointments]="nodeData"
             ></app-next-viewing>
-        </div>
+        </div> -->
 
-        <div class="col-9 shadow big-calendar bg-light">
+        <div class="col shadow big-calendar bg-light">
 
             <div style="height: 60px;" class="row mb-2 arrows position-relative">
                 <div class="col-12 position-absolute">
@@ -69,7 +74,7 @@
                                 <div *ngFor="let bh of d.bookedHours">
                                     <div *ngIf="hour === dhour && hour === bh">
                                         <h4
-                                        class="w-100 h-100 position-absolute appointment"
+                                        class="w-100 h-100 position-absolute appointment text-light"
                                         (click)="select(d.appointments, hour, content)">
                                         <span class="mx-1">{{count(d.appointments, hour)}}</span>
                                         VIEWING<span *ngIf="numberOfAppointments > 1">S</span> 

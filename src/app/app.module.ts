@@ -9,20 +9,20 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 import { FormsModule } from '@angular/forms';
-import { DateTimePipe } from './pipe/dateTimePipe';
 import { SchedulerV2Component } from './scheduler-v2/scheduler-v2.component';
 import { DatepickerV2Component } from './scheduler-v2/datepicker-v2/datepicker-v2.component';
 import { NextViewingComponent } from './scheduler-v2/next-viewing/next-viewing.component';
+import { SideNavComponent } from './shared/side-nav/side-nav.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DateTimePipe,
     SchedulerV2Component,
     DatepickerV2Component,
     NextViewingComponent,
+    SideNavComponent,
   ],
   imports: [
     BrowserModule,

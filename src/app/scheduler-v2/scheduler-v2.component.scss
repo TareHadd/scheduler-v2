@@ -7,7 +7,7 @@ main{
 }
 
 .bg-custom-gray{
-    background: rgb(185, 185, 185);
+    background: rgb(255, 255, 255);
 }
 
 .appointment{
@@ -34,6 +34,8 @@ main{
 }
 
 .big-calendar{
+
+    margin-left: 100px;
 
     .cal-row{
         height: 90vh;
