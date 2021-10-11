@@ -1,0 +1,49 @@
+<div style="height: 400px; width: 346px;" class=" border bg-light">
+    <div class="img">
+        <img src="https://q-xx.bstatic.com/xdata/images/hotel/840x460/87616830.jpg?k=d3190f350292713118958a4cbf9d82d44222d6cd6db03014bb248d904c623946&o=" alt="">
+    </div>
+    
+    <div class="p-2">
+        <div>
+            <h4>{{ next.property.name | uppercase }}</h4>
+        </div>
+        <div>
+            {{ next.property.address.street }}
+            {{ next.property.address.houseNumber }}
+            {{ next.property.address.city }}
+            {{ next.property.address.country }}
+            {{ next.property.address.zipCode }}
+        </div>
+    
+        <div class="d-flex">
+            <div>
+                <p class="">
+                    <i class= "bi bi-calendar-week"></i>
+                    {{ next.date | date: 'EEEE, MMMM d, y' }}
+                </p>
+            </div>
+    
+            <div class="mx-2">
+                <p class="">
+                    <i class=" bi bi-clock px-2"></i>
+                    {{ next.date | date:'HH:mm'}}
+                </p>
+            </div>
+        </div>
+    
+        <div class="d-flex">
+        
+            <p class="m-0 fs-2">
+                <i class="bi bi-person"></i>
+            </p>
+    
+            <p class="fs-1 roboto m-0 d-flex align-items-center px-2">
+                {{ next.attendeeCount }}
+                |
+                {{ next.maxInviteeCount}}
+            </p>
+    
+    
+        </div>
+    </div>
+</div>

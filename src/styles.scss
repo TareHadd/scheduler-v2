@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
+
+.ngb-dp-day, .ngb-dp-week-number, .ngb-dp-weekday{
+    width: 3rem !important;
+    height:  3rem !important;
+}
+
+.ngb-dp-week{
+    background: white;
+}
+
+
+.modal-dialog{
+    width: 80% !important;
+    max-width: unset !important;
+    height: 100% !important;
+}
+
+

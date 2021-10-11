@@ -1,0 +1,214 @@
+
+<main class="d-flex justify-content-center align-items-center bg-custom">
+
+    <div class="m-0 row w-100 d-flex justify-content-between pr-4">
+
+        <div class="col-2 p-0 ml-4">
+            <app-datepicker-v2
+            (sendDay)="getDay($event)"
+            ></app-datepicker-v2>
+
+            <h4 class="mt-5">NEXT VIEWING</h4>
+            <app-next-viewing
+            *ngIf="nodeData.length > 0"
+            [appointments]="nodeData"
+            ></app-next-viewing>
+        </div>
+
+        <div class="col-9 shadow big-calendar bg-light">
+
+            <div style="height: 60px;" class="row mb-2 arrows position-relative">
+                <div class="col-12 position-absolute">
+                    <div class="d-flex justify-content-between">
+
+                        <div class="d-flex align-items-center">
+
+                            <h4>{{startOfWeek | date:'dd MMMM'}}</h4>
+                            <h4 class="mx-1">-</h4>
+                            <h4>{{endOfWeek | date:'dd MMMM YYYY'}}</h4>
+
+                        </div>
+
+                        <div class="d-flex">
+
+                            <span (click)="previousWeek()" class="mx-5 pointer">
+                                <i class="bi bi-caret-left fs-2"></i>
+                            </span>
+
+
+                            <span (click)="nextWeek()" class="pointer">
+                                <i class="bi bi-caret-right fs-2"></i>
+                            </span>
+
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row cal-row p-0 pb-5 w-100" >
+
+                <div class="col-1 p-0" >
+                    <h4 class="text-light">-</h4>
+                   
+                    <div *ngFor="let hour of hours" class="hour-cells-div d-flex justify-content-center align-items-center">
+                        <h4>{{ hour }}</h4>
+                    </div>
+                </div>
+
+                <div class="col p-0 cells-col" *ngFor="let d of data">
+                    <div class="days">
+                        <h4>{{d.day | date:"dd E" | uppercase}}</h4>
+                    </div>
+
+                   <div class="cells-div">
+                        <div *ngFor="let hour of hours"  
+                        class=" position-relative cells hour-cells-div d-flex justify-content-center align-items-center pointer">
+                            
+                            <div *ngFor="let dhour of d.hours">
+                                <div *ngFor="let bh of d.bookedHours">
+                                    <div *ngIf="hour === dhour && hour === bh">
+                                        <h4
+                                        class="w-100 h-100 position-absolute appointment"
+                                        (click)="select(d.appointments, hour, content)">
+                                        <span class="mx-1">{{count(d.appointments, hour)}}</span>
+                                        VIEWING<span *ngIf="numberOfAppointments > 1">S</span> 
+                                        </h4>
+                                    </div>
+                                </div>
+
+                                <ng-template #content let-modal>
+
+                                    <div class="d-flex justify-content-end">
+                                        <i *ngIf="leftArrowStatus" (click)="previousAppointments()" 
+                                        class="bi bi-caret-left-fill fs-2 mx-5 pointer"></i>
+
+                                        <i *ngIf="!leftArrowStatus" 
+                                        class="bi bi-caret-left fs-2 mx-5 pointer"></i>
+
+                                        <i *ngIf="rightArrowStatus" (click)="nextAppointments(d.appointments)" 
+                                        class="bi bi-caret-right-fill fs-2 pointer"></i>
+
+                                        <i *ngIf="!rightArrowStatus" 
+                                        class="bi bi-caret-right fs-2 pointer"></i>
+                                    </div>
+
+                                    <div class="modal-body" *ngFor="let node of nodeData">
+
+                                        <div class="d-flex flex-column py-3">
+                                        
+                                            <div class="d-flex">
+                                                <div class="mx-2">
+                                                    <h4 class="fs-1 roboto">
+                                                        <i class="text-primary bi bi-calendar-week px-2"></i>
+                                                        <strong>{{ node.t.date | date: 'EEEE, MMMM d, y' }}</strong>
+                                                    </h4>
+                                                </div>
+        
+                                                <div class="mx-2">
+                                                    <h4 class="fs-1 roboto">
+                                                        <i class="text-primary bi bi-clock px-2"></i>
+                                                        <strong>{{ node.t.date | date:'HH:mm'}}</strong>
+                                                    </h4>
+                                                </div>
+                                            </div>
+
+                                            <div class="p-3 bg-light border">
+
+                                                <div class="d-flex justify-content-between pb-2">
+                                                    <div>
+                                                        <h4 class="fs-1 roboto">
+                                                            <strong>{{ node.t.property.name }}</strong>
+                                                        </h4>
+                                                        <h4 class="roboto fs-1">
+                                                            {{ node.t.property.address.street }}
+                                                            {{ node.t.property.address.houseNumber }}
+                                                            {{ node.t.property.address.city }}
+                                                            {{ node.t.property.address.country }}
+                                                            {{ node.t.property.address.zipCode }}
+                                                        </h4>
+                                                    </div>
+
+                                                    <div>
+                                                        <h4 class="fs-1 roboto">
+                                                            <strong>{{ node.t.property.user.profile.firstname + ' ' }}</strong>
+                                                            <strong>{{ node.t.property.user.profile.name }}</strong>
+                                                        </h4>
+                                                        <h4 class="fs-1 roboto">
+                                                            {{ node.t.property.user.usertype }}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+
+                                                <!-- *** -->
+                                                <div class="d-flex justify-content-between border p-3">
+
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="mx-2">
+                                                            <h4 class="fs-1 roboto m-0">
+                                                                <i class="text-primary bi bi-calendar-week px-2"></i>
+                                                                {{ node.t.date | date: 'EEEE, MMMM d, y' }}
+                                                            </h4>
+                                                        </div>
+
+                                                        <div class="mx-2">
+                                                            <h4 class="fs-1 roboto m-0">
+                                                                <i class="text-primary bi bi-clock px-2"></i>
+                                                                {{ node.t.date | date:'HH:mm'}}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                    <!-- * -->
+
+                                                    <div class="d-flex px-2">
+
+                                                        <h4 class="m-0 fs-2 px-2">
+                                                            <i class="bi bi-person text-primary"></i>
+                                                        </h4>
+
+                                                        <h4 class="fs-1 roboto m-0 d-flex align-items-center">
+                                                            {{ node.t.attendeeCount }}
+                                                            |
+                                                            {{ node.t.maxInviteeCount}}
+                                                        </h4>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- *** -->
+
+                                                <div class="border p-2 mt-2 text-warning d-flex justify-content-center">
+                                                    <h4 class="m-0">
+                                                        <i class="bi bi-plus-circle px-2"></i>
+                                                        Create Viewing
+                                                    </h4>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </ng-template>
+                            </div>
+
+                        </div>    
+                   </div>                
+                
+                </div>
+
+                <!-- <div class="col day-col p-0" *ngFor="let d of data">
+                    <h4>
+                        {{d.day | date:'dd E' | uppercase}}
+                    </h4>
+                </div> -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
