@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -94,11 +95,11 @@ export class AddComponent implements OnInit {
     return this.nodes.get('date') as FormControl 
   }
 
-  open(content2, date) {
-    if(new Date(date) < new Date()){
+  open(content2, date, time) {
+    if(new Date(date+'T'+time) < new Date()){
       this.status = false
     }
-    console.log(new Date(this.date))
+    console.log(new Date(date+'T'+time))
     this.modalService.open(content2, { size: 'sm' });
   }
 
