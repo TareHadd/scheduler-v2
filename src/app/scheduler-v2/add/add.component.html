@@ -1,0 +1,116 @@
+<ng-template #content2 let-modal>
+    <div class="modal-body">
+
+        {{date}} 
+        {{time}}
+
+        <form [formGroup]="nodes" (submit)="submit()" class="form">
+
+            <div>
+
+                <div class="mb-3">
+                    <h4>Date</h4>
+                </div>
+
+                <div class="input-group mb-3">
+                    <input 
+                    type="datetime-local" 
+                    class="form-control"
+                    formControlName="date">
+                </div>
+
+                <div formGroupName="contact">
+
+                    <div class="mb-3">
+                        <h4>Contact</h4>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">First name</label>
+                        <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="firstName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="name">
+                    </div>
+
+                </div>
+
+                <div formGroupName="property">
+
+                    <div class="mb-3">
+                       <h4>Property</h4>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Property name</label>
+                        <input 
+                        type="text" 
+                        class="form-control"
+                        formControlName="name">
+                    </div>
+
+                    <div formGroupName="address">
+
+                        <div class="mb-3">
+                            <label class="form-label">Street</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="street">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">House Number</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="houseNumber">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="city">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="country">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Zip</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="zipCode">
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+
+            <button class="btn btn-primary" type="submit" >Add</button>
+        </form>
+
+    </div>
+  </ng-template>
+
+  <div class="w-100 h-100" (click)="open(content2)">
+      
+  </div>
+  

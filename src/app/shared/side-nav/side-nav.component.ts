@@ -10,7 +10,7 @@ export class SideNavComponent implements OnInit {
   @Input() nodeData
   @Output() date = new EventEmitter<any>()
 
-  openNav = true
+  openNav = false
   today = new Date()
 
   constructor() { }

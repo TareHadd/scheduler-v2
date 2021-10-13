@@ -131,7 +131,7 @@
           "__typename": "Appointment"
         },{
           "id": "2442150",
-          "date": "2021-10-14T09:00:00.000+0000",
+          "date": "2021-10-11T13:00:00.000+0000",
           "maxInviteeCount": 2,
           "attendeeCount": 1,
           "showContactInformation": false,
@@ -261,6 +261,90 @@
         {
           "id": "2442909",
           "date": "2021-10-15T11:00:00.000+0000",
+          "maxInviteeCount": 3,
+          "attendeeCount": 1,
+          "showContactInformation": false,
+          "contact": {
+            "firstName": "",
+            "name": "",
+            "email": "",
+            "mobile": "",
+            "phone": "",
+            "address": {},
+            "fullName": ""
+          },
+          "property": {
+            "id": "2440850",
+            "name": "Flat ohne name",
+            "inviteeCount": 1,
+            "address": {
+              "street": "Lazarettstr.",
+              "houseNumber": "3",
+              "city": "München",
+              "country": "DE",
+              "zipCode": "80636",
+              "__typename": "Address"
+            },
+            "attachments": [],
+            "user": {
+              "profile": {
+                "firstname": "Max",
+                "name": "Mustermann",
+                "phone": "",
+                "gender": "NA",
+                "title": "NONE"
+              },
+              "usertype": "COMPANYADMIN",
+              "__typename": "LandlordUser"
+            },
+            "__typename": "Property"
+          },
+          "__typename": "Appointment"
+        },{
+          "id": "23422909",
+          "date": "2021-10-15T11:00:00.000+0000",
+          "maxInviteeCount": 3,
+          "attendeeCount": 1,
+          "showContactInformation": false,
+          "contact": {
+            "firstName": "",
+            "name": "",
+            "email": "",
+            "mobile": "",
+            "phone": "",
+            "address": {},
+            "fullName": ""
+          },
+          "property": {
+            "id": "2434350",
+            "name": "Flat ohne name",
+            "inviteeCount": 1,
+            "address": {
+              "street": "Lazarettstr.",
+              "houseNumber": "3",
+              "city": "München",
+              "country": "DE",
+              "zipCode": "80636",
+              "__typename": "Address"
+            },
+            "attachments": [],
+            "user": {
+              "profile": {
+                "firstname": "Max",
+                "name": "Mustermann",
+                "phone": "",
+                "gender": "NA",
+                "title": "NONE"
+              },
+              "usertype": "COMPANYADMIN",
+              "__typename": "LandlordUser"
+            },
+            "__typename": "Property"
+          },
+          "__typename": "Appointment"
+        },{
+          "id": "2442909",
+          "date": "2021-10-18T11:00:00.000+0000",
           "maxInviteeCount": 3,
           "attendeeCount": 1,
           "showContactInformation": false,

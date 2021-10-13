@@ -6,10 +6,6 @@ main{
     background: rgb(185, 185, 185);
 }
 
-.bg-custom-gray{
-    background: rgb(255, 255, 255);
-}
-
 .appointment{
     top: 0;
     left: 0;
@@ -73,4 +69,13 @@ main{
 ::-webkit-scrollbar {
     width: 4px;
     background: rgb(255, 255, 255);
+}
+
+
+// ADD MODAL
+// *
+// *
+
+.add:hover{
+    background: rgba($color: #000000, $alpha: 0.1);
 }

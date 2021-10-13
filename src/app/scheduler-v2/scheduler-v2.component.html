@@ -68,14 +68,14 @@
 
                    <div class="cells-div">
                         <div *ngFor="let hour of hours"  
-                        class=" position-relative cells hour-cells-div d-flex justify-content-center align-items-center pointer">
+                            class=" position-relative cells hour-cells-div d-flex justify-content-center align-items-center pointer">
                             
                             <div *ngFor="let dhour of d.hours">
                                 <div *ngFor="let bh of d.bookedHours">
                                     <div *ngIf="hour === dhour && hour === bh">
                                         <h4
                                         class="w-100 h-100 position-absolute appointment text-light"
-                                        (click)="select(d.appointments, hour, content)">
+                                        (click)="select(d.appointments, d.day, hour, content)">
                                         <span class="mx-1">{{count(d.appointments, hour)}}</span>
                                         VIEWING<span *ngIf="numberOfAppointments > 1">S</span> 
                                         </h4>
@@ -84,6 +84,7 @@
 
                                 <ng-template #content let-modal>
 
+
                                     <div class="d-flex justify-content-end">
                                         <i *ngIf="leftArrowStatus" (click)="previousAppointments()" 
                                         class="bi bi-caret-left-fill fs-2 mx-5 pointer"></i>
@@ -91,7 +92,7 @@
                                         <i *ngIf="!leftArrowStatus" 
                                         class="bi bi-caret-left fs-2 mx-5 pointer"></i>
 
-                                        <i *ngIf="rightArrowStatus" (click)="nextAppointments(d.appointments)" 
+                                        <i *ngIf="rightArrowStatus" (click)="nextAppointments()" 
                                         class="bi bi-caret-right-fill fs-2 pointer"></i>
 
                                         <i *ngIf="!rightArrowStatus" 
@@ -196,6 +197,14 @@
                                     </div>
                                 
                                 </ng-template>
+                            </div>
+
+                            <div class="w-100 h-100 add">
+                                <app-add
+                                (dataVal)="getNewValue($event)"
+                                [date]="d.day"
+                                [time]="hour"
+                                ></app-add>
                             </div>
 
                         </div>    

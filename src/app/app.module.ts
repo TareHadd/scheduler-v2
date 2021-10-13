@@ -13,7 +13,8 @@ import { SchedulerV2Component } from './scheduler-v2/scheduler-v2.component';
 import { DatepickerV2Component } from './scheduler-v2/datepicker-v2/datepicker-v2.component';
 import { NextViewingComponent } from './scheduler-v2/next-viewing/next-viewing.component';
 import { SideNavComponent } from './shared/side-nav/side-nav.component';
-
+import { AddComponent } from './scheduler-v2/add/add.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
     DatepickerV2Component,
     NextViewingComponent,
     SideNavComponent,
+    AddComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { SideNavComponent } from './shared/side-nav/side-nav.component';
     NgbModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
