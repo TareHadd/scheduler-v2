@@ -3,3 +3,19 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+
+.bg-blink {
+    animation-duration: 1.2s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+ }
+ @keyframes blink {
+    from {
+       background: white;
+    }
+    to {
+       background: rgb(223, 128, 128);
+    }
+  }

@@ -24,10 +24,11 @@
 .modal-dialog{
     width: 80% !important;
     max-width: unset !important;
-    height: 100% !important;
+    height: 90vh !important;
+    overflow-y: auto !important;
 }
 
-.modal-dialog, .modal-sm{
+.modal-sm{
     width: 600px !important;
 }
 

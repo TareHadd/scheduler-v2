@@ -18,5 +18,19 @@ export class FormatService {
     }, []);
     return newObj;
   }
+
+  formatDate(elem){
+    let fix
+
+    if(elem<10){
+      fix = '0'+elem
+    }else
+    {
+      fix = elem
+    }
+
+    return fix
+  }
+  
   
 }

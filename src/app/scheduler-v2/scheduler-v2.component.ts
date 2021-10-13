@@ -106,6 +106,7 @@ export class SchedulerV2Component implements OnInit {
       d.day = formatDate(new Date(d.day), 'Y-MM-dd', 'en');
       for (let hour of d.hours) {
         this.nodeData.filter((t) => {
+          
           let tdate = t.date.substring(0, 10);
           let hours = formatDate(t.date, 'HH:mm', 'en');
           // console.log(tdate + ' ' + hours + ' all: ' + d.day + ' ' + hour)
@@ -316,5 +317,9 @@ export class SchedulerV2Component implements OnInit {
   }
 
   getNewValue(value){
+    console.log(value)
+    this.data = []
+    this.nodeData.push(value)
+    this.logic()
   }
 }

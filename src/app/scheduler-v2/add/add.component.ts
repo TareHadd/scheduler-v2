@@ -15,6 +15,12 @@ export class AddComponent implements OnInit {
 
   random_num = Math.floor(Math.random() * 1000000)
   nodes
+  dateError = ''
+
+  currentDate = new Date()
+  modalDate
+  status = true
+  
 
   constructor(
     private modalService: NgbModal, 
@@ -55,7 +61,15 @@ export class AddComponent implements OnInit {
               __typename: ['']
             }),
             attachments: this.fb.array([]),
-            user: [''],
+            user: this.fb.group({
+              profile: this.fb.group({
+                firstname: [''],
+                name: [''],
+                phone: [''],
+                gender: [''],
+                title:['']
+              })
+            }),
             __typename: ['']
           }),
           __typename: ['']
@@ -64,22 +78,44 @@ export class AddComponent implements OnInit {
   }
 
 
+  dateManipulation(){
+    if(this.date){
+      this.modalDate = this.date
+    }
+  }
+
   
 
   get id(){
     return this.nodes.get('id') as FormControl
   }
 
+  get formDate(){
+    return this.nodes.get('date') as FormControl 
+  }
 
-  open(content2) {
+  open(content2, date) {
+    if(new Date(date) < new Date()){
+      this.status = false
+    }
+    console.log(new Date(this.date))
     this.modalService.open(content2, { size: 'sm' });
   }
 
   submit(){
     this.id.patchValue(this.random_num.toString())
-    // console.log(this.data.value)
+
+    if(new Date(this.formDate.value) < new Date){
+      this.dateError = "Date can't be old, pick a date from future"
+      return
+    }
+
     this.dataVal.emit(this.nodes.value)
     this.modalService.dismissAll()
+  }
+
+  patchDate(date, hour){
+    this.formDate.patchValue(date+'T'+hour)
   }
 
   ngOnInit(): void {

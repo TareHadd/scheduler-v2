@@ -1,15 +1,23 @@
 <ng-template #content2 let-modal>
     <div class="modal-body">
 
-        {{date}} 
-        {{time}}
+        <div *ngIf="!status" class=" bg-blink">
+            <h4 class="text-dark p-2">
+                <i class="bi bi-exclamation-octagon"></i>
+                Odabrani datum je iz prošlosti!
+            </h4>
+        </div>
 
         <form [formGroup]="nodes" (submit)="submit()" class="form">
 
             <div>
 
                 <div class="mb-3">
-                    <h4>Date</h4>
+                    <h4><strong>Date</strong></h4>
+                    <h4 class="text-danger">
+                        {{ dateError }}
+                    </h4>
+                    {{ patchDate(date, time)}}
                 </div>
 
                 <div class="input-group mb-3">
@@ -22,7 +30,7 @@
                 <div formGroupName="contact">
 
                     <div class="mb-3">
-                        <h4>Contact</h4>
+                        <h4><strong>Contact</strong></h4>
                     </div>
 
                     <div class="mb-3">
@@ -46,7 +54,7 @@
                 <div formGroupName="property">
 
                     <div class="mb-3">
-                       <h4>Property</h4>
+                       <h4><strong>Property</strong></h4>
                     </div>
 
                     <div class="mb-3">
@@ -99,6 +107,30 @@
                             formControlName="zipCode">
                         </div>
                     </div>
+
+                    <div class="mb-3">
+                        <h4><strong>User</strong></h4>
+                     </div>
+
+                    <div formGroupName="user">
+                        <div formGroupName="profile">
+                            <div class="mb-3">
+                                <label class="form-label">First name</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="firstname">
+                            </div>
+        
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="name">
+                            </div>
+                        </div>
+                    </div>
                     
 
                 </div>
@@ -110,7 +142,7 @@
     </div>
   </ng-template>
 
-  <div class="w-100 h-100" (click)="open(content2)">
+  <div class="w-100 h-100" (click)="open(content2, date)">
       
   </div>
   
