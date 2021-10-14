@@ -103,6 +103,10 @@ export class AddComponent implements OnInit {
     this.modalService.open(content2, { size: 'sm' });
   }
 
+  close(){
+    this.modalService.dismissAll()
+  }
+
   submit(){
     this.id.patchValue(this.random_num.toString())
 
@@ -113,6 +117,7 @@ export class AddComponent implements OnInit {
 
     this.dataVal.emit(this.nodes.value)
     this.modalService.dismissAll()
+    console.log(this.nodes.value)
   }
 
   patchDate(date, hour){

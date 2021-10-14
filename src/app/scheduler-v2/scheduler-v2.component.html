@@ -82,124 +82,155 @@
                                     </div>
                                 </div>
 
-                                <ng-template #content let-modal>
-
-
-                                    <div class="d-flex justify-content-end">
-                                        <i *ngIf="leftArrowStatus" (click)="previousAppointments()" 
-                                        class="bi bi-caret-left-fill fs-2 mx-5 pointer"></i>
-
-                                        <i *ngIf="!leftArrowStatus" 
-                                        class="bi bi-caret-left fs-2 mx-5 pointer"></i>
-
-                                        <i *ngIf="rightArrowStatus" (click)="nextAppointments()" 
-                                        class="bi bi-caret-right-fill fs-2 pointer"></i>
-
-                                        <i *ngIf="!rightArrowStatus" 
-                                        class="bi bi-caret-right fs-2 pointer"></i>
-                                    </div>
-
-                                    <div class="modal-body" *ngFor="let node of nodeData">
-
-                                        <div class="d-flex flex-column py-3">
-                                        
-                                            <div class="d-flex">
-                                                <div class="mx-2">
-                                                    <h4 class="fs-1 roboto">
-                                                        <i class="text-primary bi bi-calendar-week px-2"></i>
-                                                        <strong>{{ node.t.date | date: 'EEEE, MMMM d, y' }}</strong>
-                                                    </h4>
-                                                </div>
-        
-                                                <div class="mx-2">
-                                                    <h4 class="fs-1 roboto">
-                                                        <i class="text-primary bi bi-clock px-2"></i>
-                                                        <strong>{{ node.t.date | date:'HH:mm'}}</strong>
-                                                    </h4>
-                                                </div>
-                                            </div>
-
-                                            <div class="p-3 bg-light border">
-
-                                                <div class="d-flex justify-content-between pb-2">
-                                                    <div>
-                                                        <h4 class="fs-1 roboto">
-                                                            <strong>{{ node.t.property.name }}</strong>
-                                                        </h4>
-                                                        <h4 class="roboto fs-1">
-                                                            {{ node.t.property.address.street }}
-                                                            {{ node.t.property.address.houseNumber }}
-                                                            {{ node.t.property.address.city }}
-                                                            {{ node.t.property.address.country }}
-                                                            {{ node.t.property.address.zipCode }}
-                                                        </h4>
-                                                    </div>
-
-                                                    <div>
-                                                        <h4 class="fs-1 roboto">
-                                                            <strong>{{ node.t.property.user.profile.firstname + ' ' }}</strong>
-                                                            <strong>{{ node.t.property.user.profile.name }}</strong>
-                                                        </h4>
-                                                        <h4 class="fs-1 roboto">
-                                                            {{ node.t.property.user.usertype }}
-                                                        </h4>
-                                                    </div>
-                                                </div>
-
-                                                <!-- *** -->
-                                                <div class="d-flex justify-content-between border p-3">
-
-                                                    <div class="d-flex align-items-center">
-                                                        <div class="mx-2">
-                                                            <h4 class="fs-1 roboto m-0">
-                                                                <i class="text-primary bi bi-calendar-week px-2"></i>
-                                                                {{ node.t.date | date: 'EEEE, MMMM d, y' }}
-                                                            </h4>
-                                                        </div>
-
-                                                        <div class="mx-2">
-                                                            <h4 class="fs-1 roboto m-0">
-                                                                <i class="text-primary bi bi-clock px-2"></i>
-                                                                {{ node.t.date | date:'HH:mm'}}
-                                                            </h4>
-                                                        </div>
-                                                    </div>
-                                                    <!-- * -->
-
-                                                    <div class="d-flex px-2">
-
-                                                        <h4 class="m-0 fs-2 px-2">
-                                                            <i class="bi bi-person text-primary"></i>
-                                                        </h4>
-
-                                                        <h4 class="fs-1 roboto m-0 d-flex align-items-center">
-                                                            {{ node.t.attendeeCount }}
-                                                            |
-                                                            {{ node.t.maxInviteeCount}}
-                                                        </h4>
-
-
-                                                    </div>
-
-                                                </div>
-
-                                                <!-- *** -->
-
-                                                <div class="border p-2 mt-2 text-warning d-flex justify-content-center">
-                                                    <h4 class="m-0">
-                                                        <i class="bi bi-plus-circle px-2"></i>
-                                                        Create Viewing
-                                                    </h4>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 
-                                </ng-template>
                             </div>
 
-                            <div class="w-100 h-100 add">
+                            <ng-template #content let-modal>
+
+
+                                <div class="d-flex justify-content-end">
+                                    <i *ngIf="leftArrowStatus" (click)="previousAppointments()" 
+                                    class="bi bi-caret-left-fill fs-2 mx-5 pointer"></i>
+
+                                    <i *ngIf="!leftArrowStatus" 
+                                    class="bi bi-caret-left fs-2 mx-5 pointer"></i>
+
+                                    <i *ngIf="rightArrowStatus" (click)="nextAppointments()" 
+                                    class="bi bi-caret-right-fill fs-2 pointer"></i>
+
+                                    <i *ngIf="!rightArrowStatus" 
+                                    class="bi bi-caret-right fs-2 pointer"></i>
+                                </div>
+
+                                <div class="modal-body" *ngFor="let node of nodeData">
+
+                                    <div class="d-flex flex-column py-3">
+                                    
+                                        <div class="d-flex">
+                                            <div class="mx-2">
+                                                <h4 class="fs-1 roboto">
+                                                    <i class="text-primary bi bi-calendar-week px-2"></i>
+                                                    <strong>{{ node.t.date | date: 'EEEE, MMMM d, y' }}</strong>
+                                                </h4>
+                                            </div>
+    
+                                            <div class="mx-2">
+                                                <h4 class="fs-1 roboto">
+                                                    <i class="text-primary bi bi-clock px-2"></i>
+                                                    <strong>{{ node.t.date | date:'HH:mm'}}</strong>
+                                                </h4>
+                                            </div>
+                                        </div>
+
+                                        <div class="p-3 bg-light border">
+
+                                            <div class="d-flex justify-content-between pb-2">
+                                                <div>
+                                                    <h4 class="fs-1 roboto">
+                                                        <strong>{{ node.t.property.name }}</strong>
+                                                    </h4>
+                                                    <h4 class="roboto fs-1">
+                                                        {{ node.t.property.address.street }}
+                                                        {{ node.t.property.address.houseNumber }}
+                                                        {{ node.t.property.address.city }}
+                                                        {{ node.t.property.address.country }}
+                                                        {{ node.t.property.address.zipCode }}
+                                                    </h4>
+                                                </div>
+
+                                                <div>
+                                                    <h4 class="fs-1 roboto">
+                                                        <strong>{{ node.t.property.user.profile.firstname + ' ' }}</strong>
+                                                        <strong>{{ node.t.property.user.profile.name }}</strong>
+                                                    </h4>
+                                                    <h4 class="fs-1 roboto">
+                                                        {{ node.t.property.user.usertype }}
+                                                    </h4>
+                                                </div>
+                                            </div>
+
+                                            <!-- *** -->
+                                            <div class="d-flex justify-content-between border p-3">
+
+                                                <div class="d-flex align-items-center">
+                                                    <div class="mx-2">
+                                                        <h4 class="fs-1 roboto m-0">
+                                                            <i class="text-primary bi bi-calendar-week px-2"></i>
+                                                            {{ node.t.date | date: 'EEEE, MMMM d, y' }}
+                                                        </h4>
+                                                    </div>
+
+                                                    <div class="mx-2">
+                                                        <h4 class="fs-1 roboto m-0">
+                                                            <i class="text-primary bi bi-clock px-2"></i>
+                                                            {{ node.t.date | date:'HH:mm'}}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <!-- * -->
+
+                                                <div class="d-flex px-2">
+
+                                                    <h4 class="m-0 fs-2 px-2">
+                                                        <i class="bi bi-person text-primary"></i>
+                                                    </h4>
+
+                                                    <h4 class="fs-1 roboto m-0 d-flex align-items-center">
+                                                        {{ node.t.attendeeCount }}
+                                                        |
+                                                        {{ node.t.maxInviteeCount}}
+                                                    </h4>
+
+
+                                                </div>
+
+                                            </div>
+
+                                            <!-- *** -->
+
+                                           
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="w-100 d-flex justify-content-center" style="height:50px">
+
+                                    <h1 class="text-warning  add-icon" (click)="placeHolderForOpen(content3)">
+                                        <i class="bi bi-plus-circle-dotted"></i>
+                                    </h1>
+
+                                </div>
+
+                                <div class="d-flex justify-content-end">
+                                    <a class="btn btn-primary m-3" (click)="close()">Close</a>
+                                </div>
+                            
+                            </ng-template>
+
+                            <ng-template #content3 let-modal>
+                                <div>
+
+                                    <h2 class="text-danger d-flex justify-content-end close-add m-2">
+                                       <a><i class="bi bi-x-lg" (click)="close()"></i></a>
+                                    </h2>
+
+                                    <div style=" overflow-y: auto; height: 800px;">
+                                        <app-add-data
+                                        *ngIf="!status"
+                                        (dataVal)="addNewAppModal($event)"
+                                        [date]="d.day"
+                                        [hour]="hour"
+                                        ></app-add-data> 
+                                        <div *ngIf="status">
+                                            Loading
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </ng-template>
+
+                            <div class="w-100 h-100 add" style="height: 800px;">
                                 <app-add
                                 (dataVal)="getNewValue($event)"
                                 [date]="d.day"

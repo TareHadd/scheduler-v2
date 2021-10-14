@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
 import { Node } from '../core/models/thedata'
 import { addDays, eachDayOfInterval, endOfWeek, format, isThursday, startOfWeek, subDays } from 'date-fns';
 import { AppointmentsService } from '../core/services/appointments.service';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'
+import {NgbModal, ModalDismissReasons, NgbModalConfig, NgbModalRef, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
 import {formatDate} from '@angular/common'
 import { FormatService } from '../core/services/format.service';
 
@@ -21,10 +21,10 @@ export class SchedulerV2Component implements OnInit {
   array: Node[] = [];
   weekdays;
   data = [];
-  status = false;
   bookedHours = [];
 
   nodeData = [];
+  nodeDataKeeper = []
   numberOfAppointments;
 
   // used to get next appointment in modal
@@ -39,22 +39,33 @@ export class SchedulerV2Component implements OnInit {
   singleAppointment
   wierdIndex
 
+  status = false
+
 
   constructor(
     private service: AppointmentsService,
     public format: FormatService,
+    private config: NgbModalConfig,
+    private activeModal: NgbActiveModal,
     private modalService: NgbModal
-  ) {}
+  ) {
+
+    config.backdrop = 'static'
+    config.keyboard = false
+  }
 
   ngOnInit(): void {
     this.getOnlyHours();
     this.gettingData()
   }
 
+
   gettingData(){
     this.service.getData().subscribe((res) => {
       this.data = []
       this.nodeData = res
+      this.nodeDataKeeper = res
+      this.formatData(this.date);
       this.logic()
     });
   }
@@ -100,14 +111,13 @@ export class SchedulerV2Component implements OnInit {
 
   logic() {
 
-    
-    this.formatData(this.date);
     for (let d of this.data) {
       d.day = formatDate(new Date(d.day), 'Y-MM-dd', 'en');
       for (let hour of d.hours) {
         this.nodeData.filter((t) => {
           
-          let tdate = t.date.substring(0, 10);
+          // let tdate = t.date.substring(0, 10);
+          let tdate = formatDate(t.date, 'Y-MM-dd', 'en');
           let hours = formatDate(t.date, 'HH:mm', 'en');
           // console.log(tdate + ' ' + hours + ' all: ' + d.day + ' ' + hour)
           if (tdate === d.day && hours === hour) {
@@ -127,7 +137,11 @@ export class SchedulerV2Component implements OnInit {
           }
         });
       }
+
+      this.status = false
     }
+
+    console.log(this.nodeData)
 
     // console.log(this.data);
     this.allAppointments();
@@ -160,13 +174,19 @@ export class SchedulerV2Component implements OnInit {
   nextWeek() {
     this.date = addDays(this.date, 7);
     this.data = [];
-    this.logic();
+    this.nodeData = []
+    this.nodeData = this.nodeDataKeeper
+    this.formatData(this.date);
+    this.logic()
   }
 
   previousWeek() {
     this.date = subDays(this.date, 7);
     this.data = [];
-    this.logic();
+    this.nodeData = []
+    this.nodeData = this.nodeDataKeeper
+    this.formatData(this.date);
+    this.logic()
   }
 
   // We get index when we open one news and arrows switch on next or previous
@@ -234,11 +254,26 @@ export class SchedulerV2Component implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
+  placeHolderForOpen(content3){
+    this.open(content3)
+  }
+
+  open(content3) {
+    this.modalService.open(content3, { size: 'sm' });
+  }
+
+  // close modal
+  close(){
+    this.modalService.dismissAll()
+  }
+
   // Used to open modal with given data
   select(data, day, hour, content) {
     /*After we open modal, automatically we get id of appointment in 
                                     futurea appointments array*/
 
+    this.nodeDataKeeper = this.nodeData
+    console.log(this.nodeData)
     this.nodeData = [];
 
     for (let d of data) {
@@ -246,6 +281,7 @@ export class SchedulerV2Component implements OnInit {
         this.nodeData.push(d);
       }
     }
+    console.log(this.nodeData)
 
     this.modalService.open(content);
     
@@ -317,9 +353,22 @@ export class SchedulerV2Component implements OnInit {
   }
 
   getNewValue(value){
-    console.log(value)
     this.data = []
     this.nodeData.push(value)
+    this.formatData(this.date);
     this.logic()
+  }
+
+  addNewAppModal(value){
+    // this.status = true
+    this.nodeData = this.nodeDataKeeper
+    this.nodeData.push(value)
+    this.data = []
+    this.getOnlyHours()
+    this.formatData(this.date);
+    this.logic()
+    this.nodeDataKeeper = []
+    this.nodeDataKeeper = this.nodeData
+    this.modalService.dismissAll()
   }
 }

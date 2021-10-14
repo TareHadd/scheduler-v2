@@ -79,3 +79,34 @@ main{
 .add:hover{
     background: rgba($color: #000000, $alpha: 0.1);
 }
+
+.add-in-modal{
+    height: 50px;
+    font-size: 20px;
+    color: rgb(190, 189, 189);
+}
+
+.add-in-modal:hover{
+    transition: 0.3s ease-in-out;
+    background: rgb(0, 140, 233);
+    color: white !important;
+    cursor: pointer;
+    font-size: 25px;
+}
+
+.modal-header{
+    height: 200px;
+}
+
+.add-icon:hover{
+    transition: 0.2s ease-in-out;
+    color: rgb(0, 98, 255) !important;
+    transform: scale(1.3);
+    cursor: pointer;
+}
+
+.close-add:hover{
+    transition: 0.1s ease-in-out;
+    cursor: pointer;
+    color: rgb(85, 14, 14) !important;
+}

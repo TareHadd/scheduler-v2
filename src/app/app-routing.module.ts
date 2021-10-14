@@ -4,6 +4,7 @@ import { SchedulerV2Component } from './scheduler-v2/scheduler-v2.component';
 
 const routes: Routes = [
 
+  { path: 'reload', redirectTo: '/'},
   { path: '', component: SchedulerV2Component}
 
 ];

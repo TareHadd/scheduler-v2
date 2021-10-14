@@ -1,31 +1,21 @@
 
-<ng-template #content2 let-modal>
-    <div class="modal-body">
-
-        <div class="d-flex justify-content-end text-danger close">
-            <i class="bi bi-x-lg" (click)="close()"></i>
-        </div>
-
-        <div *ngIf="!status" class=" bg-blink mt-5">
-            <h4 class="text-dark p-2">
-                <i class="bi bi-exclamation-octagon"></i>
-                Odabrani datum je iz prošlosti!
-            </h4>
-        </div>
-
         <form [formGroup]="nodes" (submit)="submit()" class="form">
 
-            <div>
+            <div class="py-2 px-5">
+
+                
+
+                <h4><strong>Date</strong></h4>
 
                 <div class="mb-3">
-                    <h4><strong>Date</strong></h4>
+                    <label class="form-label">Date</label>
                     <h4 class="text-danger">
-                        {{ dateError }}
+                        {{ error }}
                     </h4>
-                    {{ patchDate(date, time)}}
                 </div>
 
                 <div class="input-group mb-3">
+                    {{ patchDate(date, hour) }}
                     <input 
                     type="datetime-local" 
                     class="form-control"
@@ -115,7 +105,7 @@
 
                     <div class="mb-3">
                         <h4><strong>User</strong></h4>
-                        </div>
+                    </div>
 
                     <div formGroupName="user">
                         <div formGroupName="profile">
@@ -136,16 +126,14 @@
                             </div>
                         </div>
                     </div>
-                    
-
+                
                 </div>
+                        
+
+
             </div>
 
-            <button class="btn btn-primary" type="submit" >Add</button>
-            <button class="btn btn-danger mx-2" type="button" (click)="close()">Close</button>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-primary m-2" type="submit">Add</button>
+            </div>
         </form>
-
-    </div>
-    </ng-template>
-
-    <div class="w-100 h-100" (click)="open(content2, date, time)"></div>
