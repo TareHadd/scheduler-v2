@@ -25,6 +25,9 @@ export class SchedulerV2Component implements OnInit {
 
   nodeData = [];
   nodeDataKeeper = []
+
+  falseNodeData = []
+
   numberOfAppointments;
 
   // used to get next appointment in modal
@@ -39,8 +42,25 @@ export class SchedulerV2Component implements OnInit {
   singleAppointment
   wierdIndex
 
-  status = false
+  statusForSpinner = false
+  pastDateStatus = false
 
+
+  /*
+  gettingData() -> formatData() -> logic() 
+
+   * formatData() -> redesign this.data
+   * logic() -> fills this.data appointment and bookedHours property and calls allAppointment()
+   * allAppointments() -> makes future appointments by deleting empty appointments from this.data and using others
+    and then makes helperArray and testerArray so we  can use it while switching to next or previous appointment in modal
+    
+    That data is called in select() and select() gives data for switching appointments by getting opened appointment data
+    It uses that falseNodeData because at first was nodeData
+  */
+
+  /* IMPORTANT
+    	delete timeout function from logic when connecting to internet data
+  */
 
   constructor(
     private service: AppointmentsService,
@@ -59,8 +79,8 @@ export class SchedulerV2Component implements OnInit {
     this.gettingData()
   }
 
-
   gettingData(){
+    this.statusForSpinner = true
     this.service.getData().subscribe((res) => {
       this.data = []
       this.nodeData = res
@@ -111,6 +131,8 @@ export class SchedulerV2Component implements OnInit {
 
   logic() {
 
+    setTimeout(() => {
+      this.statusForSpinner = false
     for (let d of this.data) {
       d.day = formatDate(new Date(d.day), 'Y-MM-dd', 'en');
       for (let hour of d.hours) {
@@ -133,26 +155,31 @@ export class SchedulerV2Component implements OnInit {
             d.appointments.push(obj);
             d.bookedHours.push(hour);
             d.bookedHours = [...new Set(d.bookedHours)];
-            this.status = true;
+           
           }
         });
       }
 
-      this.status = false
     }
+    this.allAppointments();
+    }, 500);
+    
+    
+
+    console.log(this.data)
 
     console.log(this.nodeData)
 
     // console.log(this.data);
-    this.allAppointments();
+    
 
-    let helpArray = []
+    // let helpArray = []
 
-    for(let ap of this.futureAppointments){
-      for (let a of ap){
-        helpArray.push(a)
-      }
-    }
+    // for(let ap of this.futureAppointments){
+    //   for (let a of ap){
+    //     helpArray.push(a)
+    //   }
+    // }
 
     // console.log(helpArray)
 
@@ -172,18 +199,20 @@ export class SchedulerV2Component implements OnInit {
   }
 
   nextWeek() {
+    this.statusForSpinner = true
     this.date = addDays(this.date, 7);
     this.data = [];
-    this.nodeData = []
-    this.nodeData = this.nodeDataKeeper
+    // this.nodeData = []
+    // this.nodeData = this.nodeDataKeeper
     this.formatData(this.date);
     this.logic()
   }
 
   previousWeek() {
+    this.statusForSpinner = true
     this.date = subDays(this.date, 7);
     this.data = [];
-    this.nodeData = []
+    // this.nodeData = []
     this.nodeData = this.nodeDataKeeper
     this.formatData(this.date);
     this.logic()
@@ -198,10 +227,10 @@ export class SchedulerV2Component implements OnInit {
     // console.log(this.wierdIndex)
 
     if(this.wierdIndex < this.gaArray.length-1){
-      this.nodeData = []
+      this.falseNodeData = []
       this.wierdIndex++
       activeAppointmentIndex = this.gaArray[this.wierdIndex]
-      this.nodeData = this.groupedAppointments[activeAppointmentIndex]
+      this.falseNodeData = this.groupedAppointments[activeAppointmentIndex]
       this.leftArrowStatus = true
     }
 
@@ -213,7 +242,7 @@ export class SchedulerV2Component implements OnInit {
   }
 
   previousAppointments() {
-    this.nodeData = [];
+    this.falseNodeData = [];
 
     let activeAppointmentIndex
 
@@ -221,10 +250,10 @@ export class SchedulerV2Component implements OnInit {
     console.log(this.wierdIndex)
 
     if(this.wierdIndex >= 0){
-      this.nodeData = []
+      this.falseNodeData
       this.wierdIndex--
       activeAppointmentIndex = this.gaArray[this.wierdIndex]
-      this.nodeData = this.groupedAppointments[activeAppointmentIndex]
+      this.falseNodeData = this.groupedAppointments[activeAppointmentIndex]
       this.rightArrowStatus = true
     }
 
@@ -236,87 +265,6 @@ export class SchedulerV2Component implements OnInit {
 
   }
 
-  // Used to show week on big calendar if date is picked on small ones
-  // Its on side nav, event
-  getDay(date) {
-    console.log(date)
-    let year = date.year;
-    let month = date.month;
-    let day = date.day;
-
-    this.date = new Date(year, month - 1, day);
-    this.data = [];
-    this.logic();
-  }
-
-  // modal open f
-  openModal(content) {
-    this.modalService.open(content, { centered: true });
-  }
-
-  placeHolderForOpen(content3){
-    this.open(content3)
-  }
-
-  open(content3) {
-    this.modalService.open(content3, { size: 'sm' });
-  }
-
-  // close modal
-  close(){
-    this.modalService.dismissAll()
-  }
-
-  // Used to open modal with given data
-  select(data, day, hour, content) {
-    /*After we open modal, automatically we get id of appointment in 
-                                    futurea appointments array*/
-
-    this.nodeDataKeeper = this.nodeData
-    console.log(this.nodeData)
-    this.nodeData = [];
-
-    for (let d of data) {
-      if (d.hour === hour) {
-        this.nodeData.push(d);
-      }
-    }
-    console.log(this.nodeData)
-
-    this.modalService.open(content);
-    
-    // this part is for next and previous apps
-    this.wierdIndex = this.gaArray.indexOf(day+' '+hour) 
-
-    if(this.wierdIndex >= this.gaArray.length-1){
-      this.rightArrowStatus = false
-    }else{
-      this.rightArrowStatus = true
-    }
-
-    if(this.wierdIndex <= 0){
-      this.leftArrowStatus = false
-    }else{
-      this.leftArrowStatus = true
-    }
-
-
-  }
-
-  // Used to show how much of appointments is in given hour
-  count(data, hour) {
-    let i = 0;
-    this.numberOfAppointments = '';
-    for (let d of data) {
-      if (d.hour === hour) {
-        i++;
-      }
-    }
-
-    this.numberOfAppointments = i;
-    return i;
-  }
-
   allAppointments() {
 
     let helperArray = []
@@ -324,6 +272,7 @@ export class SchedulerV2Component implements OnInit {
     if (this.data) {
       this.futureAppointments = [];
       for (let d of this.data) {
+        console.log(d.appointments)
         if (d.appointments.length > 0) {
           this.futureAppointments.push(d.appointments);
         }
@@ -350,25 +299,151 @@ export class SchedulerV2Component implements OnInit {
 
       this.groupedAppointments = ((this.format.groupBy(helperArray, 'full'))); 
 
+      console.log(this.futureAppointments)
+
   }
 
   getNewValue(value){
+    this.statusForSpinner = true
     this.data = []
     this.nodeData.push(value)
     this.formatData(this.date);
     this.logic()
   }
 
+  // Called when we add new appointment to existing appointment in that date and time (modal in modal)
   addNewAppModal(value){
+    this.statusForSpinner = true
+    this.falseNodeData = []
     // this.status = true
-    this.nodeData = this.nodeDataKeeper
+    // this.nodeData = this.nodeDataKeeper
     this.nodeData.push(value)
     this.data = []
     this.getOnlyHours()
     this.formatData(this.date);
     this.logic()
-    this.nodeDataKeeper = []
-    this.nodeDataKeeper = this.nodeData
+    // this.nodeDataKeeper = []
+    // this.nodeDataKeeper = this.nodeData
     this.modalService.dismissAll()
   }
+
+
+  // MODAL STUFF
+  //
+  // modal open f
+  openModal(content) {
+    this.modalService.open(content, { centered: true });
+  }
+
+  placeHolderForOpen(content3){
+    this.open(content3)
+  }
+
+  open(content3) {
+    this.modalService.open(content3, { size: 'sm' });
+  }
+
+  // close modal
+  close(){
+    this.falseNodeData = []
+    // this.nodeData = this.nodeDataKeeper
+    // this.data = []
+    // this.getOnlyHours()
+    // this.formatData(this.date);
+    // this.logic()
+    this.modalService.dismissAll()
+  }
+
+  // Used to open modal with given data
+  select(data, day, hour, content) {
+    /*After we open modal, automatically we get id of appointment in 
+                                    futurea appointments array*/
+
+    // this.nodeDataKeeper = this.nodeData
+    // console.log(this.nodeData)
+    // this.nodeData = [];
+
+    for (let d of data) {
+      if (d.hour === hour) {
+        this.falseNodeData.push(d);
+        // console.log(hour)
+        // console.log(d.hour)
+      }
+    }
+    // console.log(this.falseNodeData)
+
+    this.modalService.open(content);
+    
+    // this part is for next and previous apps
+    this.wierdIndex = this.gaArray.indexOf(day+' '+hour) 
+
+    if(this.wierdIndex >= this.gaArray.length-1){
+      this.rightArrowStatus = false
+    }else{
+      this.rightArrowStatus = true
+    }
+
+    if(this.wierdIndex <= 0){
+      this.leftArrowStatus = false
+    }else{
+      this.leftArrowStatus = true
+    }
+
+    console.log(this.gaArray)
+
+
+  }
+
+  // DATA IN HTML 
+  //
+
+  // Used to show how much of appointments is in given hour
+  count(data, hour) {
+    let i = 0;
+    this.numberOfAppointments = '';
+    for (let d of data) {
+      if (d.hour === hour) {
+        i++;
+      }
+    }
+
+    this.numberOfAppointments = i;
+    return i;
+  }
+
+
+  // SMALL CALENDAR TO BIG
+    
+  // Used to show week on big calendar if date is picked on small ones
+  // Its on side nav, event
+  getDay(date) {
+    this.statusForSpinner = true
+    console.log(date)
+    let year = date.year;
+    let month = date.month;
+    let day = date.day;
+
+    this.date = new Date(year, month - 1, day);
+    this.data = [];
+    this.formatData(this.date)
+    this.logic();
+  }
+
+  delete(data){
+    if(new Date(data.full) < new Date){
+      this.pastDateStatus = true
+      return
+    }else{
+      this.pastDateStatus = false
+    this.statusForSpinner = true
+    this.data = []
+    this.falseNodeData = this.falseNodeData.filter(t => t !== data)
+    this.nodeData = this.nodeData.filter(t => t !== data.t)
+    this.formatData(this.date)
+    this.logic()
+    this.falseNodeData = []
+    this.modalService.dismissAll()
+    }
+  }
+
 }

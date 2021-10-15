@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { RouterModule } from '@angular/router';
 import { AddDataComponent } from './scheduler-v2/add/add-data/add-data.component';
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { AddDataComponent } from './scheduler-v2/add/add-data/add-data.component
     SideNavComponent,
     AddComponent,
     AddDataComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

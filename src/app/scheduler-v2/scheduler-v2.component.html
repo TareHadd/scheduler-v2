@@ -1,5 +1,6 @@
 
 <main class="d-flex justify-content-center align-items-center bg-dark position-relative">
+    
 
     <div class="m-0 row w-100 d-flex justify-content-between pr-4">
 
@@ -20,7 +21,9 @@
             ></app-next-viewing>
         </div> -->
 
-        <div class="col shadow big-calendar bg-light main-col" style="height: 80%;">
+        
+
+        <div class="col shadow big-calendar bg-light main-col">
 
             <div style="height: 60px;" class="row mb-2 arrows position-relative">
                 <div class="col-12 position-absolute">
@@ -51,9 +54,11 @@
                 </div>
             </div>
 
-            <div class="row cal-row p-0 pb-5 w-100" >
+            <div class="row cal-row p-0 pb-5 w-100 m-0" >
 
-                <div class="col-1 p-0" >
+                
+
+                <div class="col-1 p-0">
                     <h4 class="text-light">-</h4>
                    
                     <div *ngFor="let hour of hours" class="hour-cells-div d-flex justify-content-center align-items-center">
@@ -61,7 +66,7 @@
                     </div>
                 </div>
 
-                <div class="col p-0 cells-col" *ngFor="let d of data">
+                <div class="col p-0 cells-col" *ngFor="let d of data" >
                     <div class="days">
                         <h4>{{d.day | date:"dd E" | uppercase}}</h4>
                     </div>
@@ -85,7 +90,9 @@
                                 
                             </div>
 
-                            <ng-template #content let-modal>
+
+                            <!-- MODAL DATA -->
+                            <ng-template #content let-modal >
 
 
                                 <div class="d-flex justify-content-end">
@@ -102,23 +109,64 @@
                                     class="bi bi-caret-right fs-2 pointer"></i>
                                 </div>
 
-                                <div class="modal-body" *ngFor="let node of nodeData">
+                                <!-- MODAL BODY -->
+
+                                <div class="modal-body" *ngFor="let node of falseNodeData">
+
 
                                     <div class="d-flex flex-column py-3">
                                     
-                                        <div class="d-flex">
-                                            <div class="mx-2">
-                                                <h4 class="fs-1 roboto">
-                                                    <i class="text-primary bi bi-calendar-week px-2"></i>
-                                                    <strong>{{ node.t.date | date: 'EEEE, MMMM d, y' }}</strong>
-                                                </h4>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <div class="mx-2">
+                                                    <h4 class="fs-1 roboto">
+                                                        <i class="text-primary bi bi-calendar-week px-2"></i>
+                                                        <strong>{{ node.t.date | date: 'EEEE, MMMM d, y' }}</strong>
+                                                    </h4>
+                                                </div>
+        
+                                                <div class="mx-2">
+                                                    <h4 class="fs-1 roboto">
+                                                        <i class="text-primary bi bi-clock px-2"></i>
+                                                        <strong>{{ node.t.date | date:'HH:mm'}}</strong>
+                                                    </h4>
+                                                </div>
                                             </div>
-    
-                                            <div class="mx-2">
-                                                <h4 class="fs-1 roboto">
-                                                    <i class="text-primary bi bi-clock px-2"></i>
-                                                    <strong>{{ node.t.date | date:'HH:mm'}}</strong>
-                                                </h4>
+
+                                            <div>
+                                                <h2 class="text-danger pointer trash">
+                                                    <i class="bi bi-trash" (click)="open(contentDelete)"></i>
+                                                    <!-- Delete appointment modal -->
+                                                    <ng-template #contentDelete let-modal>
+                                                        <div 
+                                                        style="height: 150px;" 
+                                                        class="d-flex 
+                                                        justify-content-center 
+                                                        align-items-center 
+                                                        flex-column"
+                                                        *ngIf="!pastDateStatus">
+
+                                                            <h4>Are you sure?</h4>
+                                                            <div>
+                                                                <button class="btn btn-outline-dark" (click)="delete(node)">YES</button>
+                                                                <button class="btn btn-outline-primary mx-2" (click)="close()">NO</button>
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div *ngIf="pastDateStatus" 
+                                                        style="height: 150px;"
+                                                        class="d-flex
+                                                        justify-content-center
+                                                        align-items-center
+                                                        flex-column">
+                                                            <h4 class="text-danger">
+                                                                This appointment is in past
+                                                                <button class="btn btn-outline-primary mx-2" (click)="close()">Close</button>
+                                                            </h4>
+                                                        </div>
+                                                    </ng-template>
+                                                </h2>
                                             </div>
                                         </div>
 
@@ -191,8 +239,11 @@
                                            
 
                                         </div>
+                                        
                                     </div>
                                 </div>
+
+                                <!-- ADD & CLOSE IN MODAL -->
 
                                 <div class="w-100 d-flex justify-content-center" style="height:50px">
 
@@ -208,6 +259,8 @@
                             
                             </ng-template>
 
+                            <!--  NEW MODAL ON ADD CLICK -->
+
                             <ng-template #content3 let-modal>
                                 <div>
 
@@ -217,20 +270,20 @@
 
                                     <div style=" overflow-y: auto; height: 800px;">
                                         <app-add-data
-                                        *ngIf="!status"
                                         (dataVal)="addNewAppModal($event)"
                                         [date]="d.day"
                                         [hour]="hour"
                                         ></app-add-data> 
-                                        <div *ngIf="status">
-                                            Loading
-                                        </div>
+                                        
                                     </div>
 
                                 </div>
                             </ng-template>
 
-                            <div class="w-100 h-100 add" style="height: 800px;">
+
+                            <!-- MODAL ON NEW APPOINTMENT  -->
+
+                            <div class="w-100 h-100 add">
                                 <app-add
                                 (dataVal)="getNewValue($event)"
                                 [date]="d.day"
@@ -238,16 +291,16 @@
                                 ></app-add>
                             </div>
 
-                        </div>    
+                        </div> 
                    </div>                
                 
                 </div>
 
-                <!-- <div class="col day-col p-0" *ngFor="let d of data">
-                    <h4>
-                        {{d.day | date:'dd E' | uppercase}}
-                    </h4>
-                </div> -->
+                
+
+                <div class="position-absolute" style="top: 50%; left: 50%;" *ngIf="statusForSpinner">
+                    <app-spinner></app-spinner>
+                </div>
 
             </div>
 
@@ -256,4 +309,6 @@
     </div>
 
 </main>
+
+
 

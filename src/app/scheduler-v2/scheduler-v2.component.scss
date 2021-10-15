@@ -34,7 +34,8 @@ main{
     margin-left: 100px;
 
     .cal-row{
-        height: 90vh;
+        height: 85vh;
+        overflow: hidden;
         overflow-y: auto;
     }
 }
@@ -109,4 +110,9 @@ main{
     transition: 0.1s ease-in-out;
     cursor: pointer;
     color: rgb(85, 14, 14) !important;
+}
+
+.trash:hover{
+    transition: 0.1s;
+    transform: scale(1.2);
 }

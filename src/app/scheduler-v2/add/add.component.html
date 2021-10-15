@@ -32,6 +32,38 @@
                     formControlName="date">
                 </div>
 
+                <div class="mb-3">
+                    <h4><strong>Invites</strong></h4>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Max invites</label>
+                    <input 
+                    type="number"
+                    min="0" 
+                    class="form-control"
+                    formControlName="maxInviteeCount"
+                    [ngClass]="{ 'is-invalid': !mic.valid && submitted }">
+                    <div
+                    *ngIf="submitted && !mic.valid "
+                    class="invalid-feedback"
+                    >Max invites number is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Attendees</label>
+                    <input 
+                    type="number"
+                    min="0" 
+                    class="form-control"
+                    formControlName="attendeeCount"
+                    [ngClass]="{ 'is-invalid': !ac.valid && submitted }">
+                    <div
+                    *ngIf="submitted && !ac.valid "
+                    class="invalid-feedback"
+                    >Attendees count number is required.</div>
+                </div>
+
                 <div formGroupName="contact">
 
                     <div class="mb-3">
@@ -43,7 +75,13 @@
                         <input 
                         type="text" 
                         class="form-control"
-                        formControlName="firstName">
+                        formControlName="firstName"
+                        [ngClass]="{ 'is-invalid': !cfirstName.valid && submitted }">
+                        <div
+                        *ngIf="submitted && !cfirstName.valid "
+                        class="invalid-feedback"
+                        >First name is required.
+                        </div>
                     </div>
 
                     <div class="mb-3">
@@ -51,7 +89,12 @@
                         <input 
                         type="text" 
                         class="form-control"
-                        formControlName="name">
+                        formControlName="name"
+                        [ngClass]="{ 'is-invalid': !cname.valid && submitted }">
+                        <div
+                        *ngIf="submitted && !cname.valid "
+                        class="invalid-feedback"
+                        >Name is required.</div>
                     </div>
 
                 </div>
@@ -67,7 +110,12 @@
                         <input 
                         type="text" 
                         class="form-control"
-                        formControlName="name">
+                        formControlName="name"
+                        [ngClass]="{ 'is-invalid': !pname.valid && submitted }">
+                        <div
+                        *ngIf="submitted && !pname.valid "
+                        class="invalid-feedback"
+                        >Property name is required.</div>
                     </div>
 
                     <div formGroupName="address">
@@ -77,7 +125,12 @@
                             <input 
                             type="text" 
                             class="form-control"
-                            formControlName="street">
+                            formControlName="street"
+                            [ngClass]="{ 'is-invalid': !street.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !street.valid "
+                            class="invalid-feedback"
+                            >Street name is required.</div>
                         </div>
 
                         <div class="mb-3">
@@ -85,7 +138,12 @@
                             <input 
                             type="text" 
                             class="form-control"
-                            formControlName="houseNumber">
+                            formControlName="houseNumber"
+                            [ngClass]="{ 'is-invalid': !houseNum.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !houseNum.valid "
+                            class="invalid-feedback"
+                            >House number is required.</div>
                         </div>
 
                         <div class="mb-3">
@@ -93,7 +151,12 @@
                             <input 
                             type="text" 
                             class="form-control"
-                            formControlName="city">
+                            formControlName="city"
+                            [ngClass]="{ 'is-invalid': !city.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !city.valid "
+                            class="invalid-feedback"
+                            >City name is required.</div>
                         </div>
 
                         <div class="mb-3">
@@ -101,7 +164,12 @@
                             <input 
                             type="text" 
                             class="form-control"
-                            formControlName="country">
+                            formControlName="country"
+                            [ngClass]="{ 'is-invalid': !country.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !country.valid "
+                            class="invalid-feedback"
+                            >Country name is required.</div>
                         </div>
 
                         <div class="mb-3">
@@ -109,7 +177,12 @@
                             <input 
                             type="text" 
                             class="form-control"
-                            formControlName="zipCode">
+                            formControlName="zipCode"
+                            [ngClass]="{ 'is-invalid': !zip.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !zip.valid "
+                            class="invalid-feedback"
+                            >Zip code is required.</div>
                         </div>
                     </div>
 
@@ -124,7 +197,12 @@
                                 <input 
                                 type="text" 
                                 class="form-control"
-                                formControlName="firstname">
+                                formControlName="firstname"
+                                [ngClass]="{ 'is-invalid': !ufirstName.valid && submitted }">
+                                <div
+                                *ngIf="submitted && !ufirstName.valid "
+                                class="invalid-feedback"
+                                >First name is required.</div>
                             </div>
         
                             <div class="mb-3">
@@ -132,8 +210,27 @@
                                 <input 
                                 type="text" 
                                 class="form-control"
-                                formControlName="name">
+                                formControlName="name" 
+                                [ngClass]="{ 'is-invalid': !uName.valid && submitted }">
+                                <div
+                                *ngIf="submitted && !uName.valid "
+                                class="invalid-feedback"
+                                >Name is required.</div>
                             </div>
+                            
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">User type</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="usertype" 
+                            [ngClass]="{ 'is-invalid': !userType.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !userType.valid "
+                            class="invalid-feedback"
+                            >User type field is required.</div>
                         </div>
                     </div>
                     
