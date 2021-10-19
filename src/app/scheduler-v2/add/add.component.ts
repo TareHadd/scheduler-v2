@@ -1,7 +1,6 @@
-import { formatDate } from '@angular/common';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add',
@@ -82,19 +81,6 @@ export class AddComponent implements OnInit {
 
   }
 
-  get formDate(){
-    return this.nodes.get('date') as FormControl 
-  }
-
-  get contact(){
-    return this.nodes.get('contact') as FormGroup
-  }
-
-  get property(){
-    return this.nodes.get('property') as FormGroup
-  }
-  
-
   open(content2, date, time) {
     if(new Date(date+'T'+time) < new Date()){
       this.status = false
@@ -130,6 +116,20 @@ export class AddComponent implements OnInit {
 
   patchDate(date, hour){
     this.formDate.patchValue(date+'T'+hour)
+  }
+
+  // Getting form controls
+  
+  get formDate(){
+    return this.nodes.get('date') as FormControl 
+  }
+
+  get contact(){
+    return this.nodes.get('contact') as FormGroup
+  }
+
+  get property(){
+    return this.nodes.get('property') as FormGroup
   }
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +9,9 @@ export class AppComponent {
   title = 'appointment-scheduler-copy';
   viewDate: Date = new Date();
   events = [];
+
+    @HostListener('window:resize', ['$event'])
+    onResize(event) {
+    event.target.innerWidth;
+  }
 }

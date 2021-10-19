@@ -9,18 +9,6 @@
         (date)="getDay($event)"
         ></app-side-nav>
 
-        <!-- <div class="col-2 p-0 ml-4">
-            <app-datepicker-v2
-            (sendDay)="getDay($event)"
-            ></app-datepicker-v2>
-
-            <h4 class="mt-5">NEXT VIEWING</h4>
-            <app-next-viewing
-            *ngIf="nodeData.length > 0"
-            [appointments]="nodeData"
-            ></app-next-viewing>
-        </div> -->
-
         
 
         <div class="col shadow big-calendar bg-light main-col">
@@ -39,12 +27,12 @@
 
                         <div class="d-flex">
 
-                            <span (click)="previousWeek()" class="mx-5 pointer">
+                            <span (click)="previousWeek()" class="mx-5 pointer week">
                                 <i class="bi bi-caret-left fs-2"></i>
                             </span>
 
 
-                            <span (click)="nextWeek()" class="pointer">
+                            <span (click)="nextWeek()" class="pointer week">
                                 <i class="bi bi-caret-right fs-2"></i>
                             </span>
 

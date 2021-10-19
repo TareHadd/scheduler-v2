@@ -44,6 +44,12 @@ main{
     top: 0%;
     right: 0%;
     z-index: 100;
+
+    .week:hover{
+        transition: 0.2s;
+        transform: scale(1.1);
+    }
+
 }
 
 .hour-cells-div{
@@ -68,9 +74,14 @@ main{
 // Scrollbar editing
 
 ::-webkit-scrollbar {
-    width: 4px;
-    background: rgb(255, 255, 255);
+    width: 10px;
+    background: rgb(80, 80, 80);
 }
+
+::-webkit-scrollbar-thumb {
+    width: 2px;
+    background: #f8f9fa;
+  }
 
 
 // ADD MODAL

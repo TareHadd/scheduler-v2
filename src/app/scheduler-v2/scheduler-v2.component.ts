@@ -18,14 +18,13 @@ export class SchedulerV2Component implements OnInit {
   endOfWeek!: any;
   hours: any[] = [];
   // Starting point
-  array: Node[] = [];
+
   weekdays;
   data = [];
   bookedHours = [];
 
   nodeData = [];
   nodeDataKeeper = []
-
   falseNodeData = []
 
   numberOfAppointments;
@@ -35,8 +34,6 @@ export class SchedulerV2Component implements OnInit {
   rightArrowStatus = true;
   leftArrowStatus = true;
  
-
-  newValue
   groupedAppointments
   gaArray = []
   singleAppointment
@@ -77,6 +74,7 @@ export class SchedulerV2Component implements OnInit {
   ngOnInit(): void {
     this.getOnlyHours();
     this.gettingData()
+    console.log(innerWidth)
   }
 
   gettingData(){
@@ -340,7 +338,7 @@ export class SchedulerV2Component implements OnInit {
   }
 
   open(content3) {
-    this.modalService.open(content3, { size: 'sm' });
+    this.modalService.open(content3, { size: 'sm', centered: true }, );
   }
 
   // close modal
@@ -352,6 +350,7 @@ export class SchedulerV2Component implements OnInit {
     // this.formatData(this.date);
     // this.logic()
     this.modalService.dismissAll()
+    this.pastDateStatus = false
   }
 
   // Used to open modal with given data
@@ -435,15 +434,16 @@ export class SchedulerV2Component implements OnInit {
       return
     }else{
       this.pastDateStatus = false
-    this.statusForSpinner = true
-    this.data = []
-    this.falseNodeData = this.falseNodeData.filter(t => t !== data)
-    this.nodeData = this.nodeData.filter(t => t !== data.t)
-    this.formatData(this.date)
-    this.logic()
-    this.falseNodeData = []
-    this.modalService.dismissAll()
+      this.statusForSpinner = true
+      this.data = []
+      this.falseNodeData = this.falseNodeData.filter(t => t !== data)
+      this.nodeData = this.nodeData.filter(t => t !== data.t)
+      this.formatData(this.date)
+      this.logic()
+      this.falseNodeData = []
+      this.modalService.dismissAll()
     }
   }
+
 
 }
