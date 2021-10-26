@@ -39,6 +39,7 @@ main{
 
     .cal-row{
         overflow: hidden;
+        min-width: 600px;
     }
 }
 
@@ -132,7 +133,7 @@ main{
 
 // mobile responsivity
 
-@media (max-width: 700px) {
+@media (max-width: 996px) {
 
     h4{
         font-size: 15px !important;
