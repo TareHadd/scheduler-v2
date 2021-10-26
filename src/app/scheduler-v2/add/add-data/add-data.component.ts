@@ -17,6 +17,11 @@ export class AddDataComponent implements OnInit {
   error = ''
 
   submitted = false
+  
+  isCollapsedInvites = true;
+  isCollapsedContact = true;
+  isCollapsedProperty = true;
+  isCollapsedUser = true;
 
   constructor(private fb: FormBuilder) {
 

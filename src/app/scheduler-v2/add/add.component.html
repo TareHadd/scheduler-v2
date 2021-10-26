@@ -32,165 +32,237 @@
                     formControlName="date">
                 </div>
 
-                <div class="mb-3">
-                    <h4><strong>Invites</strong></h4>
-                </div>
+                <!-- Invites Start -->
 
                 <div class="mb-3">
-                    <label class="form-label">Max invites</label>
-                    <input 
-                    type="number"
-                    min="0" 
-                    class="form-control"
-                    formControlName="maxInviteeCount"
-                    [ngClass]="{ 'is-invalid': !mic.valid && submitted }">
-                    <div
-                    *ngIf="submitted && !mic.valid "
-                    class="invalid-feedback"
-                    >Max invites number is required.</div>
+                    <h4
+                        (click)="collapse.toggle()"
+                        [attr.aria-expanded]="!isCollapsedInvites"
+                    >
+                        <strong
+                        [ngClass]="{'text-danger': ( !mic.valid || !ac.valid ) && submitted}"
+                        >
+                            Invites
+                            <i *ngIf="isCollapsedInvites" class="bi bi-arrow-down-square-fill mx-2 pointer"></i>
+                            <i *ngIf="!isCollapsedInvites" class="bi bi-arrow-up-square-fill mx-2 pointer"></i>
+                        </strong>
+                    </h4>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Attendees</label>
-                    <input 
-                    type="number"
-                    min="0" 
-                    class="form-control"
-                    formControlName="attendeeCount"
-                    [ngClass]="{ 'is-invalid': !ac.valid && submitted }">
-                    <div
-                    *ngIf="submitted && !ac.valid "
-                    class="invalid-feedback"
-                    >Attendees count number is required.</div>
+                <div  #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsedInvites">
+                    <div class="mb-3">
+                        <label class="form-label">Max invites</label>
+                        <input 
+                        type="number"
+                        min="0" 
+                        class="form-control"
+                        formControlName="maxInviteeCount"
+                        [ngClass]="{ 'is-invalid': !mic.valid && submitted }">
+                        <div
+                        *ngIf="submitted && !mic.valid "
+                        class="invalid-feedback"
+                        >Max invites number is required.</div>
+                    </div>
+    
+                    <div class="mb-3">
+                        <label class="form-label">Attendees</label>
+                        <input 
+                        type="number"
+                        min="0" 
+                        class="form-control"
+                        formControlName="attendeeCount"
+                        [ngClass]="{ 'is-invalid': !ac.valid && submitted }">
+                        <div
+                        *ngIf="submitted && !ac.valid "
+                        class="invalid-feedback"
+                        >Attendees count number is required.</div>
+                    </div>
                 </div>
 
+                <!-- Invites End -->
+
+
+                <!-- Contact -->
                 <div formGroupName="contact">
 
                     <div class="mb-3">
-                        <h4><strong>Contact</strong></h4>
+                        <h4
+                            (click)="collapseContact.toggle()"
+                            [attr.aria-expanded]="!isCollapsedContact"
+                        >
+                            <strong
+                            [ngClass]="{'text-danger': ( !cfirstName.valid || !cname.valid ) && submitted}">
+                                Contact
+                                <i *ngIf="isCollapsedContact" class="bi bi-arrow-down-square-fill mx-2 pointer"></i>
+                                <i *ngIf="!isCollapsedContact" class="bi bi-arrow-up-square-fill mx-2 pointer"></i>
+                            </strong>
+                        </h4>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">First name</label>
-                        <input 
-                        type="text" 
-                        class="form-control"
-                        formControlName="firstName"
-                        [ngClass]="{ 'is-invalid': !cfirstName.valid && submitted }">
-                        <div
-                        *ngIf="submitted && !cfirstName.valid "
-                        class="invalid-feedback"
-                        >First name is required.
+                    <div #collapseContact="ngbCollapse" [(ngbCollapse)]="isCollapsedContact">
+                        <div class="mb-3">
+                            <label class="form-label">First name</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="firstName"
+                            [ngClass]="{ 'is-invalid': !cfirstName.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !cfirstName.valid "
+                            class="invalid-feedback"
+                            >First name is required.
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input 
-                        type="text" 
-                        class="form-control"
-                        formControlName="name"
-                        [ngClass]="{ 'is-invalid': !cname.valid && submitted }">
-                        <div
-                        *ngIf="submitted && !cname.valid "
-                        class="invalid-feedback"
-                        >Name is required.</div>
+    
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input 
+                            type="text" 
+                            class="form-control"
+                            formControlName="name"
+                            [ngClass]="{ 'is-invalid': !cname.valid && submitted }">
+                            <div
+                            *ngIf="submitted && !cname.valid "
+                            class="invalid-feedback"
+                            >Name is required.</div>
+                        </div>
                     </div>
 
                 </div>
+                <!-- Contact End -->
 
                 <div formGroupName="property">
 
-                    <div class="mb-3">
-                        <h4><strong>Property</strong></h4>
-                    </div>
+                <!-- Property Start -->
 
                     <div class="mb-3">
-                        <label class="form-label">Property name</label>
-                        <input 
-                        type="text" 
-                        class="form-control"
-                        formControlName="name"
-                        [ngClass]="{ 'is-invalid': !pname.valid && submitted }">
-                        <div
-                        *ngIf="submitted && !pname.valid "
-                        class="invalid-feedback"
-                        >Property name is required.</div>
+                        <h4
+                            (click)="collapseProperty.toggle()"
+                            [attr.aria-expanded]="!isCollapsedProperty"
+                        >
+                            <strong
+                            [ngClass]="{'
+                                text-danger': ( 
+                                    !pname.valid    || 
+                                    !street.valid   || 
+                                    !houseNum.valid ||
+                                    !zip.valid      ||
+                                    !country.valid  ||
+                                    !city.valid ) 
+                                    && submitted}"
+                            >
+                                Property
+                                <i *ngIf="isCollapsedProperty" class="bi bi-arrow-down-square-fill mx-2 pointer"></i>
+                                <i *ngIf="!isCollapsedProperty" class="bi bi-arrow-up-square-fill mx-2 pointer"></i>
+                            </strong>
+                        </h4>
                     </div>
 
-                    <div formGroupName="address">
-
+                    <div #collapseProperty="ngbCollapse" [(ngbCollapse)]="isCollapsedProperty">
                         <div class="mb-3">
-                            <label class="form-label">Street</label>
+                            <label class="form-label">Property name</label>
                             <input 
                             type="text" 
                             class="form-control"
-                            formControlName="street"
-                            [ngClass]="{ 'is-invalid': !street.valid && submitted }">
+                            formControlName="name"
+                            [ngClass]="{ 'is-invalid': !pname.valid && submitted }">
                             <div
-                            *ngIf="submitted && !street.valid "
+                            *ngIf="submitted && !pname.valid "
                             class="invalid-feedback"
-                            >Street name is required.</div>
+                            >Property name is required.</div>
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">House Number</label>
-                            <input 
-                            type="text" 
-                            class="form-control"
-                            formControlName="houseNumber"
-                            [ngClass]="{ 'is-invalid': !houseNum.valid && submitted }">
-                            <div
-                            *ngIf="submitted && !houseNum.valid "
-                            class="invalid-feedback"
-                            >House number is required.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">City</label>
-                            <input 
-                            type="text" 
-                            class="form-control"
-                            formControlName="city"
-                            [ngClass]="{ 'is-invalid': !city.valid && submitted }">
-                            <div
-                            *ngIf="submitted && !city.valid "
-                            class="invalid-feedback"
-                            >City name is required.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Country</label>
-                            <input 
-                            type="text" 
-                            class="form-control"
-                            formControlName="country"
-                            [ngClass]="{ 'is-invalid': !country.valid && submitted }">
-                            <div
-                            *ngIf="submitted && !country.valid "
-                            class="invalid-feedback"
-                            >Country name is required.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Zip</label>
-                            <input 
-                            type="text" 
-                            class="form-control"
-                            formControlName="zipCode"
-                            [ngClass]="{ 'is-invalid': !zip.valid && submitted }">
-                            <div
-                            *ngIf="submitted && !zip.valid "
-                            class="invalid-feedback"
-                            >Zip code is required.</div>
+    
+                        <div formGroupName="address" >
+    
+                            <div class="mb-3">
+                                <label class="form-label">Street</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="street"
+                                [ngClass]="{ 'is-invalid': !street.valid && submitted }">
+                                <div
+                                *ngIf="submitted && !street.valid "
+                                class="invalid-feedback"
+                                >Street name is required.</div>
+                            </div>
+    
+                            <div class="mb-3">
+                                <label class="form-label">House Number</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="houseNumber"
+                                [ngClass]="{ 'is-invalid': !houseNum.valid && submitted }">
+                                <div
+                                *ngIf="submitted && !houseNum.valid "
+                                class="invalid-feedback"
+                                >House number is required.</div>
+                            </div>
+    
+                            <div class="mb-3">
+                                <label class="form-label">City</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="city"
+                                [ngClass]="{ 'is-invalid': !city.valid && submitted }">
+                                <div
+                                *ngIf="submitted && !city.valid "
+                                class="invalid-feedback"
+                                >City name is required.</div>
+                            </div>
+    
+                            <div class="mb-3">
+                                <label class="form-label">Country</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="country"
+                                [ngClass]="{ 'is-invalid': !country.valid  && submitted }">
+                                <div
+                                *ngIf="submitted && !country.valid "
+                                class="invalid-feedback"
+                                >Country name is required.</div>
+                            </div>
+    
+                            <div class="mb-3">
+                                <label class="form-label">Zip</label>
+                                <input 
+                                type="text" 
+                                class="form-control"
+                                formControlName="zipCode"
+                                [ngClass]="{ 'is-invalid': !zip.valid && submitted }">
+                                <div
+                                *ngIf="submitted && !zip.valid "
+                                class="invalid-feedback"
+                                >Zip code is required.</div>
+                            </div>
                         </div>
                     </div>
 
+                <!-- Property End -->
+
+                <!--  User Start -->
                     <div class="mb-3">
-                        <h4><strong>User</strong></h4>
-                        </div>
+                        <h4
+                            (click)="collapseUser.toggle()"
+                            [attr.aria-expanded]="!isCollapsedUser"
+                        >
+                            <strong
+                            [ngClass]="{'text-danger': 
+                            (   !ufirstName.valid  ||
+                                !uName.valid       ||
+                                !userType.valid )  && 
+                                submitted}">
+                                User
+                                <i *ngIf="isCollapsedUser" class="bi bi-arrow-down-square-fill mx-2 pointer"></i>
+                                <i *ngIf="!isCollapsedUser" class="bi bi-arrow-up-square-fill mx-2 pointer"></i>
+                            </strong>
+                        </h4>
+                    </div>
 
-                    <div formGroupName="user">
+                    <div formGroupName="user" #collapseUser="ngbCollapse" [(ngbCollapse)]="isCollapsedUser">
                         <div formGroupName="profile">
                             <div class="mb-3">
                                 <label class="form-label">First name</label>
@@ -233,6 +305,7 @@
                             >User type field is required.</div>
                         </div>
                     </div>
+                <!-- User End -->
                     
 
                 </div>
@@ -243,6 +316,9 @@
         </form>
 
     </div>
-    </ng-template>
 
-    <div class="w-100 h-100" (click)="open(content2, date, time)"></div>
+</ng-template>
+
+<div class="w-100 h-100" (click)="open(content2, date, time)"></div>
+
+

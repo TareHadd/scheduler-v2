@@ -22,6 +22,12 @@ export class AddComponent implements OnInit {
   status = true
 
   submitted = false
+
+  isCollapsedInvites = true;
+  isCollapsedContact = true;
+  isCollapsedProperty = true;
+  isCollapsedUser = true;
+
   
 
   constructor(
@@ -103,7 +109,7 @@ export class AddComponent implements OnInit {
 
     this.submitted = true
 
-    if(!this.nodes.valid){
+    if(this.nodes.valid){
        this.dataVal.emit(this.nodes.value)
     }else{
       return

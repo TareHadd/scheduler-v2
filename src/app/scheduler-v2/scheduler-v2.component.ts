@@ -1,8 +1,7 @@
 import { Component, OnInit, EventEmitter, HostListener } from '@angular/core';
-import { Node } from '../core/models/thedata'
-import { addDays, eachDayOfInterval, endOfWeek, format, isThursday, startOfWeek, subDays } from 'date-fns';
+import { addDays, eachDayOfInterval, endOfWeek, startOfWeek, subDays } from 'date-fns';
 import { AppointmentsService } from '../core/services/appointments.service';
-import {NgbModal, ModalDismissReasons, NgbModalConfig, NgbModalRef, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap'
+import { NgbModal, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap'
 import {formatDate} from '@angular/common'
 import { FormatService } from '../core/services/format.service';
 
@@ -63,7 +62,6 @@ export class SchedulerV2Component implements OnInit {
     private service: AppointmentsService,
     public format: FormatService,
     private config: NgbModalConfig,
-    private activeModal: NgbActiveModal,
     private modalService: NgbModal
   ) {
 

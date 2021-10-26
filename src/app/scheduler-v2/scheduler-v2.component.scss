@@ -1,5 +1,7 @@
 main{
     min-height: 100vh;
+    width: calc(100% - 70px);
+    margin-left: 70px;
 }
 
 .bg-custom{
@@ -31,12 +33,12 @@ main{
 
 .big-calendar{
 
-    margin-left: 100px;
+    
+    height: 85vh;
+    overflow-y: auto;
 
     .cal-row{
-        height: 85vh;
         overflow: hidden;
-        overflow-y: auto;
     }
 }
 
@@ -126,4 +128,13 @@ main{
 .trash:hover{
     transition: 0.1s;
     transform: scale(1.2);
+}
+
+// mobile responsivity
+
+@media (max-width: 700px) {
+
+    h4{
+        font-size: 15px !important;
+    }
 }
